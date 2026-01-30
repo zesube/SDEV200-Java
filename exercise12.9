@@ -1,0 +1,15 @@
+public class TestBinaryConverter {
+    public static void main(String[] args) {
+        String[] testInputs = {"1010", "11002", "abc", "1001"};
+
+        for (String input : testInputs) {
+            try {
+                int decimal = BinaryConverter.bin2Dec(input);
+                System.out.println("Binary: " + input + " → Decimal: " + decimal);
+            } catch (BinaryFormatException ex) {
+                System.out.println("Error converting '" + input + "': " + ex.getMessage());
+            }
+        }
+    }
+}
+import java.util.GregorianCalendar;
