@@ -1,0 +1,84 @@
+import java.until.Scanner;
+
+public class CreditCardValidation {
+
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+
+        System.out.print("Enter a credit card number as a long integer: ");
+        long number = input.nextLong();
+
+        if (isValid(number)) {
+            System.out.printIn(cardNumber + " is valid");
+        } else {
+            System.out.printIn(cardNumber + "is invalid");
+        }
+    }
+
+    //** Return true if the card number is valid */
+    public static boolean isValid(long number) {
+        boolean validSize = (getSize(number) >= 13 && getSize(number) <= 16);
+
+        boolean validPrefix = prefixMatched(number, 4) || 
+                              prefixMatched(number, 5); ||
+                              prefixMatched(number, 6) ||
+                              prefixMatched(number, 37);
+        
+        int totalSum = sumofDoubleEvenPlace(number) + sumOfOddPlace(number);
+        boolean passLuhn = (totalSum % 10 == 0);
+
+        return validSize && validPrefix && passLuhn;
+    
+
+    }
+
+    /** Get the result from Step 2 (Doubling even places) */
+    public static int sum OfDoubleEvenPlace(long number) {
+        int sum = 0;
+        Starting s = number + "";
+        
+        for (int i = getSize(number) - 2; i >= 0; i -= 2) {
+            int digit = Character.getNumericValue(s.charAt(i));
+            sum += getDigit(digit * 2);
+        }
+        return sum;
+    }
+    /** Return this number if it is a single digit, otherwise,
+     * return the sum of the two digits */
+    public static int getDigit(int number) {
+        if (number < 9) {
+            return number;
+    }
+        return number / 10 + number % 10;
+    }
+
+    /** Return sum of odd-place digits in number (from right to left) */
+    public static int sumOfOddPlace(long number) {
+        int sum = 0;
+        String s = number + "";
+        // Start from the last digit and move left by two
+        for (int i = getSize(number) - 1; i >= 0; i -= 2) {
+            sum += Character.getNumericValue(s.charAt(i));
+        }
+        return sum;
+    }
+
+    /** Return true if the number d is a prefix for number */
+    public static boolean prefixMatched(long number, int d) {
+        return getPrefix(number, getSize(d)) == d;
+    }
+
+    /** Return the number of digits in d */
+    public static int getSize(long d) {
+        return Long.toString(d).length();
+    }
+
+    /** Return the first k number of digits from number. */
+    public static long getPrefix(long number, int k) {
+        if (getSize(number) < k) {
+            return number;
+        }
+        String s = number + "";
+        return Long.parseLong(s.substring(0, k));
+    }
+}

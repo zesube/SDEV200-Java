@@ -1,0 +1,71 @@
+public class Exercise09_09 {
+    public static void main(String[] args) {
+        // Create three RegularPolygon objects
+        RegularPolygon polygon1 = new RegularPolygon();
+        RegularPolygon polygon2 = new RegularPolygon(6, 4);
+        RegularPolygon polygon3 = new RegularPolygon(10, 4, 5.6, 7.8);
+
+        // Display results for polygon 1
+        System.out.println("Polygon 1 perimeter: " + polygon1.getPerimeter());
+        System.out.println("Polygon 1 area: " + polygon1.getArea());
+
+        // Display results for polygon 2
+        System.out.println("Polygon 2 perimeter: " + polygon2.getPerimeter());
+        System.out.println("Polygon 2 area: " + polygon2.getArea());
+
+        // Display results for polygon 3
+        System.out.println("Polygon 3 perimeter: " + polygon3.getPerimeter());
+        System.out.println("Polygon 3 area: " + polygon3.getArea());
+    }
+}
+
+class RegularPolygon {
+    // Data fields
+    private int n = 3;
+    private double side = 1;
+    private double x = 0;
+    private double y = 0;
+
+    // No-arg constructor
+    public RegularPolygon() {
+    }
+
+    // Constructor with specified sides and length, centered at (0,0)
+    public RegularPolygon(int n, double side) {
+        this.n = n;
+        this.side = side;
+        this.x = 0;
+        this.y = 0;
+    }
+
+    // Constructor with all specified values
+    public RegularPolygon(int n, double side, double x, double y) {
+        this.n = n;
+        this.side = side;
+        this.x = x;
+        this.y = y;
+    }
+
+    // Accessors (Getters) and Mutators (Setters)
+    public int getN() { return n; }
+    public void setN(int n) { this.n = n; }
+
+    public double getSide() { return side; }
+    public void setSide(double side) { this.side = side; }
+
+    public double getX() { return x; }
+    public void setX(double x) { this.x = x; }
+
+    public double getY() { return y; }
+    public void setY(double y) { this.y = y; }
+
+    // Method to calculate perimeter
+    public double getPerimeter() {
+        return n * side;
+    }
+
+    // Method to calculate area
+    public double getArea() {
+        return (n * Math.pow(side, 2)) / (4 * Math.tan(Math.PI / n));
+    }
+}
