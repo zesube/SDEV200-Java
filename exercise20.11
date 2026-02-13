@@ -1,0 +1,48 @@
+import java.io.*;
+import java.util.Stack;
+
+public class Exercise20_11 {
+    public static void main(String[] args) throws IOException {
+        String path = args[0];
+        FileReader fileReader = new FileReader(path);
+        BufferedReader bufferedReader = new BufferedReader(fileReader);
+        Stack<Character> stack = new Stack<>();
+        int c;
+        boolean isBalanced = true;
+        
+        while ((c = bufferedReader.read()) != -1) {
+            char character = (char) c;
+            switch (character) {
+                case '(':
+                case '{':
+                case '[':
+                    stack.push(character);
+                    break;
+                case ')':
+                    if (stack.isEmpty() || stack.pop() != '(') {
+                        isBalanced = false;
+                    }
+                    break;
+                case '}':
+                    if (stack.isEmpty() || stack.pop() != '{') {
+                        isBalanced = false;
+                    }
+                    break;
+                case ']':
+                    if (stack.isEmpty() || stack.pop() != '[') {
+                        isBalanced = false;
+                    }
+                    break;
+            }
+            if (!isBalanced) {
+                break;
+            }
+        }
+        bufferedReader.close();
+        
+        if (!stack.isEmpty()) {
+            isBalanced = false;
+        }
+        System.out.println(isBalanced ? "Correct grouping pairs" : "Incorrect grouping pairs");
+    }
+}
