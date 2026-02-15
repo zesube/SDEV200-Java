@@ -81,4 +81,4 @@ public class CreditCardValidation {
         String s = number + "";
         return Long.parseLong(s.substring(0, k));
     }
-}
+} 
