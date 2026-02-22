@@ -1,0 +1,31 @@
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.layout.GridPane;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
+
+public class ImageGrid extends Application {
+    @Override
+    public void start(Stage primaryStage) {
+        GridPane grid = new GridPane();
+        Image image1 = new Image("path/to/image1.jpg");
+        Image image2 = new Image("path/to/image2.jpg");
+        Image image3 = new Image("path/to/image3.jpg");
+        Image image4 = new Image("path/to/image4.jpg");
+
+        grid.add(new ImageView(image1), 0, 0);
+        grid.add(new ImageView(image2), 1, 0);
+        grid.add(new ImageView(image3), 0, 1);
+        grid.add(new ImageView(image4), 1, 1);
+
+        Scene scene = new Scene(grid);
+        primaryStage.setTitle("Image Grid");
+        primaryStage.setScene(scene);
+        primaryStage.show();
+    }
+
+    public static void main(String[] args) {
+        launch(args);
+    }
+}
